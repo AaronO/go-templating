@@ -10,3 +10,8 @@ type BindataLoader BindataAssetFunc
 func (l BindataLoader) Load(filename string) ([]byte, error) {
 	return BindataAssetFunc(l)(filename)
 }
+
+// Bindata returns a loader based on a go-bindata .Asset() function
+func Bindata(fn BindataAssetFunc) BindataLoader {
+	return BindataLoader(fn)
+}
