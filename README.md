@@ -18,7 +18,8 @@ t := templating.NewEnvironment(templating.Options{
     // Cache templates from loader
     Cache: false,
     // Template loader
-    Loader: loaders.BindataLoader(yourBindataPkg.Asset),
+    Loader: loaders.Bindata(yourBindataPkg.Asset),
+    // Loader: loaders.FS("/path_to_project/templates"),
     // Template utility functions
     Funcs: map[string]interface{}{
         "dollars": func(str string) string {
