@@ -122,7 +122,11 @@ func (env *Environment) loadChild(filename string) (*template.Template, error) {
 	if err != nil {
 		return nil, err
 	}
-	return template.Must(env.loadBase()).Parse(data)
+	base, err := env.loadBase()
+	if err != nil {
+		return nil, err
+	}
+	return base.Parse(data)
 }
 
 // templateName returns a reasonable name for a template from it's filename
