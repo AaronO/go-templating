@@ -18,8 +18,8 @@ t := templating.NewEnvironment(templating.Options{
     // Cache templates from loader
     Cache: false,
     // Template loader
-    Loader: loaders.Bindata(yourBindataPkg.Asset),
-    // Loader: loaders.FS("/path_to_project/templates"),
+    Loader: templating.BindataLoader(yourBindataPkg.Asset),
+    // Loader: templating.FSLoader("/path_to_project/templates"),
     // Template utility functions
     Funcs: map[string]interface{}{
         "dollars": func(str string) string {
@@ -27,4 +27,14 @@ t := templating.NewEnvironment(templating.Options{
         },
     },
 })
+```
+
+### Loaders
+
+`go-templating` ships two default `Loader`s, `templating.BindataLoader` and `templating.FSLoader`. You can write and supply your own loaders by simply implementing the `Loader` interface:
+
+```go
+type Loader interface {
+    Load(filename string) ([]byte, error)
+}
 ```
